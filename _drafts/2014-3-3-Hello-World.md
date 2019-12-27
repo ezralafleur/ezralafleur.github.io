@@ -11,8 +11,13 @@ Last week, a friend of mine sent me sketches so I could turn them into vinyl cut
 ## Steps
 
 The images I received were as seen below.
-![FlowerSketch.jpeg]({{site.baseurl}}/_posts/FlowerSketch.jpeg)
-![CircleSketch.jpeg]({{site.baseurl}}/_posts/CircleSketch.jpeg)
+![FlowerSketch.jpeg]({{site.baseurl}}/images/Vinyl/FlowerSketch.jpeg =250px)
+![CircleSketch.jpeg]({{site.baseurl}}/images/Vinyl/CircleSketch.jpeg =250px)
+
+Early tracing attempts were not just rough around the edges, but they traced the shadows and the dark spots on the paper as well. To remedy this, I first opened the images in ColorSync Utility and turned Gamma all the way down, Saturation all the way down, and Contrast all the way up. This resulted in the following images to be cropped and rotated.
+![ColorFlower.jpeg]({{site.baseurl}}/images/Vinyl/ColorFlower.jpeg =250px)
+![ColorCircle.jpeg]({{site.baseurl}}/images/Vinyl/ColorCircle.jpeg =250px)
+
 
 
 
