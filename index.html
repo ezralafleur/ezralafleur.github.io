@@ -1,18 +1,61 @@
----
-layout: default
----
+<html>
+    <head>
+        <script type="text/javascript" src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
+        <script type="text/javascript">
+        var s=200;
+        var e=200;
+        var allosc=[];
+        var t;
+        Tone.Master.volume.value=-10
+        function go()
+        {
+            for (var h=0;h<allosc.length;h++)
+            {
+                allosc[h].stop()
+            }
+            var t=Tone.Master
+            t.volume.value=-10
+            i=e-s
+            for (j=0;j<=i;j++)
+            {
+                allosc[j]=new Tone.Oscillator(parseInt(s)+parseInt(j)).connect(t)
+                allosc[j].start()
+            }
+        }
+        function no()
+        {
+            for (var h=0;h<allosc.length;h++)
+            {
+                allosc[h].stop()
+            }
+        }
 
-<div class="posts">
-  {% for post in site.posts %}
-    <article class="post">
-
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
-
-      <div class="entry">
-        {{ post.excerpt }}
-      </div>
-
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    </article>
-  {% endfor %}
-</div>
+        function updatestart(v)
+        {
+            s=v
+            document.getElementById("sfreq").innerHTML=v+"hz"
+            go()
+        }
+        function updateend(v)
+        {
+            if (v<s)
+            {
+                v=s+1
+                this.value=v
+            }
+            e=v
+            document.getElementById("efreq").innerHTML=v+"hz"
+            go()
+        }
+        </script>
+    </head>
+    <body>
+        Starting frequency (hz)</br>
+        <input type="range" min="100" max="300" value="200" class="slider" id="startfreq" onchange=updatestart(this.value)><span id="sfreq">200hz</span></br>
+    
+        Ending frequency (hz)</br>
+        <input type="range" min="100" max="300" value="200" class="slider" id="endfreq" onchange=updateend(this.value)><span id="efreq">200hz</span></br>
+        <button onclick=go()>Start</button>
+        <button onclick=no()>Stop</button>
+    </body>
+</html>
