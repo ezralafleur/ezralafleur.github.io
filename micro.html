@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Microtonal</title>
+        <script type="text/javascript" src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
+        <script type="text/javascript">
+            var e=[]
+            var plucky=new Tone.PluckSynth().toMaster()
+            plucky.sync()
+            function scale(v)
+            {
+                v=parseInt(v)
+                for (i=0;i<=v;i++)
+                {
+                    e[i]=Tone.Midi((i+1)*(12/v)+50).toFrequency()
+                    plucky.triggerAttackRelease(e[i], '8n', '8n')
+                }
+            }
+            function play()
+            {
+                Tone.Transport.start()
+            }
+        </script>
+    </head>
+    <body>
+        EDO: <input id="edo" value="12" onchange="scale(this.value)"/>
+        <button onclick=play()>Play</button>
+    </body>
+</html>

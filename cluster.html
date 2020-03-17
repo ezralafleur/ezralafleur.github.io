@@ -14,11 +14,12 @@
                 allosc[h].stop()
             }
             var t=Tone.Master
-            t.volume.value=-10
+            t.volume.value=-20
             i=e-s
             for (j=0;j<=i;j++)
             {
                 allosc[j]=new Tone.Oscillator(parseInt(s)+parseInt(j)).connect(t)
+                allosc[j].type="sawtooth"
                 allosc[j].start()
             }
         }
@@ -34,18 +35,16 @@
         {
             s=v
             document.getElementById("sfreq").innerHTML=v+"hz"
-            go()
         }
         function updateend(v)
         {
             if (v<s)
             {
-                v=s+1
+                v=parseInt(s)+1
                 this.value=v
             }
             e=v
             document.getElementById("efreq").innerHTML=v+"hz"
-            go()
         }
         </script>
     </head>

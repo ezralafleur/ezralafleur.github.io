@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Synth</title>
+<script type="text/javascript" src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
+<script type="text/javascript">
+Tone.Master.volume.value=-10;
+var t=0;
+var seq=Tone.Transport;
+var voice=new Tone.PolySynth().toMaster();
+var edo=12;
+seq.scheduleRepeat(function doit(){playSequence(t);},'8n');
+
+function playSequence(x)
+{
+    voice.releaseAll();
+    current=document.getElementsByClassName("x"+x%16);
+    a=[];
+    for (i=0;i<current.length;i++)
+    {
+        if (current[i].checked)
+        {
+            a.push(Tone.Frequency(60+(parseInt(current[i].classList[1])*(12/edo)),"midi").toFrequency());
+        }
+        console.log(a);
+        voice.triggerAttackRelease(a);
+    }
+    t++
+}
+
+function populate(wid, len)
+{
+    var s=document.getElementById("seq");
+    for (y=len-1;y>=0;y--)
+    {
+        for (x=0;x<wid;x++)
+        {
+            s.insertAdjacentHTML('beforeend', '<input type="checkbox" class="x'+x+' '+y+'"/>');
+        }
+        s.insertAdjacentHTML('beforeend', "<br>");
+    }
+    
+}
+
+</script>
+</head>
+<body onload="populate(16, 12)">
+    Volume: <input id="vol" type="range" value="-10" oninput="Tone.Master.volume.value=this.value;" min="-30" max="-3"/>
+<button onclick="seq.start()">Start</button>
+<button onclick="seq.stop();voice.releaseAll();">Stop</button>
+<br>
+EDO: <input type="range" value="12" max="100" min="1" oninput="edo=parseInt(this.value);document.getElementById('edoval').innerHTML=this.value;"/>
+<span id="edoval">12</span> (Equal Divisions of the Octave)<br>
+<div id="seq"> 
+</div>
+</body>
+</html>
