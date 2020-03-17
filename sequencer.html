@@ -21,7 +21,6 @@ function playSequence(x)
         {
             a.push(Tone.Frequency(60+(parseInt(current[i].classList[1])*(12/edo)),"midi").toFrequency());
         }
-        console.log(a);
         voice.triggerAttackRelease(a);
     }
     t++
