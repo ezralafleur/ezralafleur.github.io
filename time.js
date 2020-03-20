@@ -52,6 +52,9 @@ function playMel(){
 
 document.getElementById("startButton").addEventListener("click", ()=>Tone.Transport.start());
 document.getElementById("stopButton").addEventListener("click", ()=>Tone.Transport.stop());
+document.getElementById("startButton").addEventListener("touch", ()=>Tone.Transport.start());
+document.getElementById("stopButton").addEventListener("touch", ()=>Tone.Transport.stop());
+
 Tone.Transport.scheduleRepeat(playChord, "0:0.5:0");
 Tone.Transport.scheduleRepeat(playBass, "1:0:0");
 Tone.Transport.scheduleRepeat(playMel, "4:0:0");
