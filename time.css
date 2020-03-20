@@ -1,0 +1,21 @@
+body {
+    text-align:center;
+    /*background:linear-gradient(117deg, #FFF, #333);
+    background-size:contain;
+    background-repeat:no-repeat;*/
+}
+
+#description {
+    width:50%;
+    line-height:20pt;
+    margin:auto;
+}
+
+#intro {
+    font-weight:bold;
+    font-family:sans-serif;
+}
+
+#buttons {
+    padding:20px;
+}

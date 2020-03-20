@@ -34,19 +34,6 @@ function playChord(){
     thirdMinute=(Math.floor(now.getUTCSeconds()/20))+1;
     quarterMinute=(Math.floor(now.getUTCSeconds()/15))+1;
     newfundamental=((quarterMinute+1)*fundamental)/(quarterMinute);
-    document.getElementById("fund").innerText=newfundamental+"hz";
-    partials=[];
-    // Chord (aka the second tone) updates every minute
-    partials.push(now.getUTCMinutes()%6+2);
-    partials.push((now.getUTCMilliseconds()%3)+1);
-    partials.push((now.getUTCMinutes()%6+2)*((now.getUTCSeconds()%3)+1));
-    partials.push(1/((now.getUTCSeconds()%2)+1));
-    partials.push(quarterMinute/((now.getUTCMilliseconds()%2)+1));
-    p=document.getElementById("partials");
-    p.innerText="";
-    for (i=0;i<partials.length;i++){
-        p.innerText+=" "+partials[i];
-    }
     minuteTone=((now.getUTCMinutes()%6+2)*newfundamental)/(now.getUTCMinutes()%6+1);
     mainPoly.triggerAttackRelease([newfundamental, minuteTone,
                 newfundamental*((now.getUTCMilliseconds()%3)+1), minuteTone*((now.getUTCSeconds()%3)+1),

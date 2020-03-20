@@ -3,15 +3,21 @@
 <meta charset="UTF-8">
 <title>Generative Music</title>
 <script type="text/javascript" src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
+<link rel="stylesheet" type="text/css" href="time.css">
 </head>
 <body>
+    <div id="buttons">
     <button id="startButton">Start</button>
     <button id="stopButton">Stop</button>
-    <div id="description">
-This is a generative composition in which notes in the harmonic series are triggered based on time.</br>
-The fundamental frequency is <span id="fund"></span><br>
-The partials are <span id="partials"></span>
+    </div>
 
+    <div id="intro">This is a generative composition in which notes in the harmonic series are triggered based on time.</div>
+    <div id="description">
+The fundamental frequency is generated based on the current date<br>
+The bpm is based on the current hour<br>
+The root of the chord is changed every 15 seconds<br>
+A main harmony note is determined every minute and based on the current second and millisecond, each beat triggers a different multiple
+of the fundamental and harmony note<br>
     </div>
 <script type="text/javascript" src="time.js"></script>
 </body>
