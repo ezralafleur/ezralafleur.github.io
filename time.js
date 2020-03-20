@@ -5,7 +5,7 @@ rev.generate();
 let mainPoly = new Tone.PolySynth(6, Tone.Synth).connect(rev);
 mainPoly.volume.value=-10;
 let bassSynth = new Tone.Synth("sine").connect(dist);
-let singGran = new Tone.GrainPlayer("Samples/Ah.wav");
+let singGran = new Tone.GrainPlayer("https://github.com/ezralafleur/ezralafleur.github.io/blob/master/Samples/Ah.wav");
 
 bassSynth.volume.value=-10;
 
