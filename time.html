@@ -6,11 +6,12 @@
 <link rel="stylesheet" type="text/css" href="time.css">
 </head>
 <body>
+    <div id="grad">
     <div id="buttons">
     <button id="startButton">Start</button>
     <button id="stopButton">Stop</button>
     </div>
-
+<div id="text" class="boxPulse">
     <div id="intro">This is a generative composition in which notes in the harmonic series are triggered based on time.</div>
     <div id="description">
 The fundamental frequency is generated based on the current date<br>
@@ -19,6 +20,8 @@ The root of the chord is changed every 15 seconds<br>
 A main harmony note is determined every minute and based on the current second and millisecond, each beat triggers a different multiple
 of the fundamental and harmony note<br>
     </div>
+</div>
+</div>
 <script type="text/javascript" src="time.js"></script>
 </body>
 </html>

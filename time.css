@@ -1,14 +1,25 @@
 body {
     text-align:center;
-    /*background:linear-gradient(117deg, #FFF, #333);
-    background-size:contain;
-    background-repeat:no-repeat;*/
+    background-repeat:no-repeat;
+    animation-name:grad;
+    animation-duration:10s;
+}
+
+#text{
+    width:50%;
+    margin:auto;
+    
+}
+
+.boxPulse {
+    outline-style:solid;
+    outline-width:2px;
+    animation-name:boxBorder;
+    animation-duration:1s;
 }
 
 #description {
-    width:50%;
     line-height:20pt;
-    margin:auto;
 }
 
 #intro {
@@ -18,4 +29,9 @@ body {
 
 #buttons {
     padding:20px;
+}
+
+@keyframes boxBorder {
+    from {outline-style:hidden; outline-width:2px;}
+    to {outline-style:solid; outline-width:0px;}
 }

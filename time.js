@@ -22,7 +22,7 @@ bassSynth.volume.value=-10;
 // Fundamental frequency is date divided by four
 let fundamental=150+now.getUTCDate()*2;
 let newfundamental=fundamental;
-
+let minuteTone=fundamental;
 
 // TIMING SECTION
 let pulse = ((now.getUTCHours()+1)*4)+60;
@@ -43,6 +43,8 @@ function playChord(){
 function playBass(){
     now=new Date();
     bassSynth.triggerAttackRelease(newfundamental/8, (60/pulse)-0.1);
+    document.getElementById("text").classList.toggle("boxPulse");
+    updateGrad();
 }
 
 function playMel(){
@@ -50,11 +52,21 @@ function playMel(){
     melSynth2.triggerAttackRelease(((minuteTone)*((now.getUTCMilliseconds()%4)+2))/((now.getUTCMilliseconds()%4)+1), "4:0:0");
 }
 
+function updateGrad(){
+    g=document.getElementById("grad");
+    grad1="linear-gradient("+melSynth.frequency.value%360+"deg, rgb("+fundamental+" "+"0"+" "+fundamental+"), rgb("+newfundamental+" "+newfundamental+" "+"0"+") 70%)";
+    grad2="linear-gradient("+mainPoly.voices[3].frequency.value%30+"deg, rgb("+(mainPoly.voices[4].frequency.value%200+55)+" "+(mainPoly.voices[2].frequency.value%200+55)+" 0"+"), rgb(0 "+(mainPoly.voices[4].frequency.value%200+55)+" "+(mainPoly.voices[3].frequency.value%200+55)+") 40%)";
+    g.style.background=grad2;
+}
+
 document.getElementById("startButton").addEventListener("click", ()=>Tone.Transport.start());
 document.getElementById("stopButton").addEventListener("click", ()=>Tone.Transport.stop());
 document.getElementById("startButton").addEventListener("touch", ()=>Tone.Transport.start());
 document.getElementById("stopButton").addEventListener("touch", ()=>Tone.Transport.stop());
+document.onload=updateGrad();
 
 Tone.Transport.scheduleRepeat(playChord, "0:0.5:0");
 Tone.Transport.scheduleRepeat(playBass, "1:0:0");
 Tone.Transport.scheduleRepeat(playMel, "4:0:0");
+
+document.getElementById("grad").style.height=window.innerHeight+"px";
