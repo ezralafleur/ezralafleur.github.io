@@ -55,7 +55,7 @@ function playMel(){
 function updateGrad(){
     g=document.getElementById("grad");
     grad1="linear-gradient("+melSynth.frequency.value%360+"deg, rgb("+fundamental+" "+"0"+" "+fundamental+"), rgb("+newfundamental+" "+newfundamental+" "+"0"+") 70%)";
-    grad2="linear-gradient("+mainPoly.voices[3].frequency.value%30+"deg, rgb("+(mainPoly.voices[4].frequency.value%200+55)+" "+(mainPoly.voices[2].frequency.value%200+55)+" 0"+"), rgb(0 "+(mainPoly.voices[4].frequency.value%200+55)+" "+(mainPoly.voices[3].frequency.value%200+55)+") 40%)";
+    grad2="linear-gradient("+newfundamental+"deg, rgb("+(mainPoly.voices[4].frequency.value%80+150)+" "+(mainPoly.voices[2].frequency.value%80+150)+" 0"+"), rgb(0 "+(mainPoly.voices[4].frequency.value%80+150)+" "+(mainPoly.voices[3].frequency.value%80+150)+") 40%)";
     g.style.background=grad2;
 }
 
