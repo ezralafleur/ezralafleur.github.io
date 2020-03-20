@@ -1,11 +1,19 @@
 now=new Date();
 let rev = new Tone.Reverb(5).toMaster();
+let wide = new Tone.StereoWidener(1).toMaster();
 let dist = new Tone.Distortion(0.6).toMaster();
+var pingPong = new Tone.PingPongDelay("8n", 0.4).toMaster();
 rev.generate();
+rev.wet.value=0.85;
 let mainPoly = new Tone.PolySynth(6, Tone.Synth).connect(rev);
-mainPoly.volume.value=-10;
+mainPoly.volume.value=-12;
 let bassSynth = new Tone.Synth("sine").connect(dist);
-let singGran = new Tone.GrainPlayer("https://github.com/ezralafleur/ezralafleur.github.io/blob/master/Samples/Ah.wav");
+let melSynth = new Tone.Synth("triangle").connect(pingPong);
+let melSynth2 = new Tone.Synth("triangle").connect(pingPong);
+melSynth.volume.value=-10;
+melSynth.portamento=0.1;
+melSynth2.volume.value=-10;
+melSynth2.portamento=0.1;
 
 bassSynth.volume.value=-10;
 
@@ -50,7 +58,13 @@ function playBass(){
     bassSynth.triggerAttackRelease(newfundamental/8, (60/pulse)-0.1);
 }
 
+function playMel(){
+    melSynth.triggerAttackRelease(((minuteTone)*((now.getUTCSeconds()%4)+2))/((now.getUTCSeconds()%4)+1), "4:0:0");
+    melSynth2.triggerAttackRelease(((minuteTone)*((now.getUTCMilliseconds()%4)+2))/((now.getUTCMilliseconds()%4)+1), "4:0:0");
+}
+
 document.getElementById("startButton").addEventListener("click", ()=>Tone.Transport.start());
 document.getElementById("stopButton").addEventListener("click", ()=>Tone.Transport.stop());
 Tone.Transport.scheduleRepeat(playChord, "0:0.5:0");
 Tone.Transport.scheduleRepeat(playBass, "1:0:0");
+Tone.Transport.scheduleRepeat(playMel, "4:0:0");
