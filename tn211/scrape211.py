@@ -66,9 +66,9 @@ def get_resource_links(url, obj):
             d['name']=''
 
         if row.find('p', {'class': 'resource-name'}).find('a', href=True) is not None:
-            d['link']='https://tn211.myresourcedirectory.com'+row.find('p', {'class': 'resource-name'}).find('a', href=True)['href']
+            d['url']='https://tn211.myresourcedirectory.com'+row.find('p', {'class': 'resource-name'}).find('a', href=True)['href']
         else:
-            d['link']=''
+            d['url']=''
 
         if row.find('p', {'class': 'resource-description'}) is not None:
             d['description']=row.find('p', {'class': 'resource-description'}).text

@@ -8,4 +8,4 @@ tn_geom = tnshape['geometry']['coordinates'];
 tn_poly = L.polyline(tn_geom, {color: '#1565c0'}).addTo(map);
 map.fitBounds(tn_poly.getBounds());
 
-L.control.layers.tree(null, overlaysTree, {collapsed: false}).addTo(map);
+tree_control = L.control.layers.tree(null, overlaysTree, {collapsed: false}).addTo(map)
