@@ -31,7 +31,7 @@ def get_category_links(obj):
                 get_category_links(item)
         else:
             print("\nGetting", obj['url'])
-            page = requests.get(obj['url'], timeout=10)
+            page = requests.get(obj['url'], timeout=20)
             status = page.status_code
             print("Recieved with status", status)
 
@@ -58,7 +58,7 @@ def get_category_links(obj):
 def get_resource_links(url, obj):
     global trunk
     print("\nGetting", url)
-    page = requests.get(url, timeout=10)
+    page = requests.get(url, timeout=20)
     status = page.status_code
     print("Recieved with status", status)
 
