@@ -15,14 +15,6 @@ if resources == '':
 else:
     trunk = literal_eval(resources.replace('\n', ''))
 
-def test_iter(obj):
-    if 'children' in obj.keys():
-        if obj['children']!=[]:
-            for item in obj['children']:
-                test_iter(item)
-        else:
-            print(obj['url'])
-
 # Recursively crawl lists of categories until it reaches a link to resources
 def get_category_links(obj):
     if 'children' in obj.keys():
