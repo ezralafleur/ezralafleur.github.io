@@ -63,8 +63,9 @@ npz=[ // list of census tracts in NPZ sorted by subzone
 "013300"]
 ];
 
-csv = Papa.parse("https://aton.al/npz/map/resources.csv", {
+csv = Papa.parse("resources.csv", {
   header: true,
+  download: true,
 	complete: function(results) {
 		console.log(results);
 	}
