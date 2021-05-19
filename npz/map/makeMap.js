@@ -65,7 +65,7 @@ npz=[ // list of census tracts in NPZ sorted by subzone
 
 let NPZResources;
 
-let r = Papa.parse("resources.csv", {
+let r = Papa.parse("npzresources.csv", {
   header: true,
   download: true,
 	complete: function c(results) {
