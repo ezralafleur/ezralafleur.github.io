@@ -16,7 +16,7 @@ NPZResources=[
     "phone":"615-750-5027",
     "email":"",
     "link":"https://www.edgehillneighborhoodpartnership.org/",
-    "coords":[36.143032,-86.79012],
+    "coords":[36.143032, -86.79012],
     "description":""
   },
   {

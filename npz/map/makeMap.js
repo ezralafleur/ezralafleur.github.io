@@ -63,6 +63,13 @@ npz=[ // list of census tracts in NPZ sorted by subzone
 "013300"]
 ];
 
+csv = Papa.parse("https://aton.al/npz/map/resources.csv", {
+  header: true,
+	complete: function(results) {
+		console.log(results);
+	}
+});
+
 var map = L.map('map').setView([36.157, -86.786], 12);
 
 L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
@@ -110,42 +117,42 @@ categories = {
 for (i=0;i<NPZResources.length;i++)
 {
   // Create the content of the popup for the marker
-  if (NPZResources[i]['link'] != '')
+  if (NPZResources[i]['Link'] != '')
   {
-    content="<a target='_blank' href='"+NPZResources[i]['link']+"'>"+NPZResources[i]["name"]+"</a>";
+    content="<a target='_blank' href='"+NPZResources[i]['Link']+"'>"+NPZResources[i]["Name"]+"</a>";
   }
   else
   {
-    content="<b>"+NPZResources[i]["name"]+"</b>";
+    content="<b>"+NPZResources[i]["Name"]+"</b>";
   }
 
-  if (NPZResources[i]['phone'].length>0)
+  if (NPZResources[i]['Phone'].length>0)
   {
-    content+="</br><a style='font-weight:normal;' href='tel:"+NPZResources[i]['phone'].match(/\d/g).join('')+"'>"+NPZResources[i]['phone']+"</a>";
+    content+="</br><a style='font-weight:normal;' href='tel:"+NPZResources[i]['Phone'].match(/\d/g).join('')+"'>"+NPZResources[i]['Phone']+"</a>";
   }
 
-  if (NPZResources[i]['email'].length>0)
+  if (NPZResources[i]['Email'].length>0)
   {
-    content+="</br><a style='font-weight:normal;' href='mailto:"+NPZResources[i]['email']+"'>"+NPZResources[i]['email']+"</a>";
+    content+="</br><a style='font-weight:normal;' href='mailto:"+NPZResources[i]['Email']+"'>"+NPZResources[i]['Email']+"</a>";
   }
 
-  if (NPZResources[i]['address'].length>0)
+  if (NPZResources[i]['Address'].length>0)
   {
-    content+="</br>"+NPZResources[i]['address'];
+    content+="</br>"+NPZResources[i]['Address'];
   }
 
-  if (NPZResources[i]['description'].length>0)
+  if (NPZResources[i]['Description'].length>0)
   {
-    content+="</br><small>"+NPZResources[i]['description']+"</small>";
+    content+="</br><small>"+NPZResources[i]['Description']+"</small>";
   }
 
-  if (NPZResources[i]['coords']!='')
+  if (NPZResources[i]['Coords']!='')
   {
     for (c in categories)
     {
-      if (NPZResources[i]['categories'].includes(c))
+      if (NPZResources[i]['Categories'].includes(c))
       {
-        categories[c].push(L.marker(NPZResources[i]['coords']).bindPopup(content));
+        categories[c].push(L.marker(NPZResources[i]['Coords']).bindPopup(content));
       }
     }
   }
@@ -186,36 +193,36 @@ function refreshLocations(e)
   {
     for (i=0;i<NPZResources.length;i++)
     {
-      if (displayedCategories.some(r=>NPZResources[i]['categories'].includes(r)))
+      if (displayedCategories.some(r=>NPZResources[i]['Categories'].includes(r)))
       {
         lcontent+="<div class='resourceContent'>";
-        if (NPZResources[i]['link'] != '')
+        if (NPZResources[i]['Link'] != '')
         {
-          lcontent+="<a target='_blank' href='"+NPZResources[i]['link']+"'>"+NPZResources[i]["name"]+"</a>";
+          lcontent+="<a target='_blank' href='"+NPZResources[i]['Link']+"'>"+NPZResources[i]["Name"]+"</a>";
         }
         else
         {
-          lcontent+="<div class='resourceBox'><b>"+NPZResources[i]["name"]+"</b>";
+          lcontent+="<div class='resourceBox'><b>"+NPZResources[i]["Name"]+"</b>";
         }
 
-        if (NPZResources[i]['phone'].length>0)
+        if (NPZResources[i]['Phone'].length>0)
         {
-          lcontent+="</br><a style='font-weight:normal;' href='tel:"+NPZResources[i]['phone'].match(/\d/g).join('')+"'>"+NPZResources[i]['phone']+"</a>";
+          lcontent+="</br><a style='font-weight:normal;' href='tel:"+NPZResources[i]['Phone'].match(/\d/g).join('')+"'>"+NPZResources[i]['Phone']+"</a>";
         }
 
-        if (NPZResources[i]['email'].length>0)
+        if (NPZResources[i]['Email'].length>0)
         {
-          lcontent+="</br><a style='font-weight:normal;' href='mailto:"+NPZResources[i]['email']+"'>"+NPZResources[i]['email']+"</a>";
+          lcontent+="</br><a style='font-weight:normal;' href='mailto:"+NPZResources[i]['Email']+"'>"+NPZResources[i]['Email']+"</a>";
         }
 
-        if (NPZResources[i]['address'].length>0)
+        if (NPZResources[i]['Address'].length>0)
         {
-          lcontent+="</br>"+NPZResources[i]['address'];
+          lcontent+="</br>"+NPZResources[i]['Address'];
         }
 
-        if (NPZResources[i]['description'].length>0)
+        if (NPZResources[i]['Description'].length>0)
         {
-          lcontent+="</br><small>"+NPZResources[i]['description']+"</small>";
+          lcontent+="</br><small>"+NPZResources[i]['Description']+"</small>";
         }
         lcontent+="</div><hr>";
       }
