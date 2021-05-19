@@ -68,13 +68,9 @@ NPZResources = Papa.parse("resources.csv", {
   download: true,
 	complete: function(results) {
 		console.log(results);
+    createMarkers();
 	}
 });
-
-for (var resource in NPZResources) {
-  resource['Coords'] = resource['Coords'].split(/,\s*/);
-  resource['Categories'] = resource['Categories'].split(/,\s*/);
-}
 
 var map = L.map('map').setView([36.157, -86.786], 12);
 
@@ -120,45 +116,52 @@ categories = {
   "Transportation": []
 };
 
-for (i=0;i<NPZResources.length;i++)
-{
-  // Create the content of the popup for the marker
-  if (NPZResources[i]['Link'] != '')
-  {
-    content="<a target='_blank' href='"+NPZResources[i]['Link']+"'>"+NPZResources[i]["Name"]+"</a>";
+function createMarkers() {
+  for (var resource in NPZResources) {
+    resource['Coords'] = resource['Coords'].split(/,\s*/);
+    resource['Categories'] = resource['Categories'].split(/,\s*/);
   }
-  else
+  
+  for (i=0;i<NPZResources.length;i++)
   {
-    content="<b>"+NPZResources[i]["Name"]+"</b>";
-  }
-
-  if (NPZResources[i]['Phone'].length>0)
-  {
-    content+="</br><a style='font-weight:normal;' href='tel:"+NPZResources[i]['Phone'].match(/\d/g).join('')+"'>"+NPZResources[i]['Phone']+"</a>";
-  }
-
-  if (NPZResources[i]['Email'].length>0)
-  {
-    content+="</br><a style='font-weight:normal;' href='mailto:"+NPZResources[i]['Email']+"'>"+NPZResources[i]['Email']+"</a>";
-  }
-
-  if (NPZResources[i]['Address'].length>0)
-  {
-    content+="</br>"+NPZResources[i]['Address'];
-  }
-
-  if (NPZResources[i]['Description'].length>0)
-  {
-    content+="</br><small>"+NPZResources[i]['Description']+"</small>";
-  }
-
-  if (NPZResources[i]['Coords']!='')
-  {
-    for (c in categories)
+    // Create the content of the popup for the marker
+    if (NPZResources[i]['Link'] != '')
     {
-      if (NPZResources[i]['Categories'].includes(c))
+      content="<a target='_blank' href='"+NPZResources[i]['Link']+"'>"+NPZResources[i]["Name"]+"</a>";
+    }
+    else
+    {
+      content="<b>"+NPZResources[i]["Name"]+"</b>";
+    }
+
+    if (NPZResources[i]['Phone'].length>0)
+    {
+      content+="</br><a style='font-weight:normal;' href='tel:"+NPZResources[i]['Phone'].match(/\d/g).join('')+"'>"+NPZResources[i]['Phone']+"</a>";
+    }
+
+    if (NPZResources[i]['Email'].length>0)
+    {
+      content+="</br><a style='font-weight:normal;' href='mailto:"+NPZResources[i]['Email']+"'>"+NPZResources[i]['Email']+"</a>";
+    }
+
+    if (NPZResources[i]['Address'].length>0)
+    {
+      content+="</br>"+NPZResources[i]['Address'];
+    }
+
+    if (NPZResources[i]['Description'].length>0)
+    {
+      content+="</br><small>"+NPZResources[i]['Description']+"</small>";
+    }
+
+    if (NPZResources[i]['Coords']!='')
+    {
+      for (c in categories)
       {
-        categories[c].push(L.marker(NPZResources[i]['Coords']).bindPopup(content));
+        if (NPZResources[i]['Categories'].includes(c))
+        {
+          categories[c].push(L.marker(NPZResources[i]['Coords']).bindPopup(content));
+        }
       }
     }
   }
