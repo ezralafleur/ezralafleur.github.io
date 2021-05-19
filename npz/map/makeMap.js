@@ -63,13 +63,18 @@ npz=[ // list of census tracts in NPZ sorted by subzone
 "013300"]
 ];
 
-csv = Papa.parse("resources.csv", {
+NPZResources = Papa.parse("resources.csv", {
   header: true,
   download: true,
 	complete: function(results) {
 		console.log(results);
 	}
 });
+
+for (var resource in NPZResources) {
+  resource['Coords'] = resource['Coords'].split(/,\s*/);
+  resource['Categories'] = resource['Categories'].split(/,\s*/);
+}
 
 var map = L.map('map').setView([36.157, -86.786], 12);
 
