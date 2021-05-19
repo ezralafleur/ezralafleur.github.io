@@ -63,13 +63,15 @@ npz=[ // list of census tracts in NPZ sorted by subzone
 "013300"]
 ];
 
-NPZResources = Papa.parse("resources.csv", {
+let NPZResources;
+
+let r = Papa.parse("resources.csv", {
   header: true,
   download: true,
-	complete: function(results) {
-		console.log(results);
-    createMarkers();
-	}
+	complete: function c(results) {
+    NPZResources = results.data;
+    createMarkers(results.data);
+  }
 });
 
 var map = L.map('map').setView([36.157, -86.786], 12);
@@ -116,12 +118,12 @@ categories = {
   "Transportation": []
 };
 
-function createMarkers() {
-  for (var resource in NPZResources) {
-    resource['Coords'] = resource['Coords'].split(/,\s*/);
-    resource['Categories'] = resource['Categories'].split(/,\s*/);
+function createMarkers(NPZResources) {
+  for (var i in NPZResources) {
+    NPZResources[i]['Coords'] = NPZResources[i]['Coords'].split(/,\s*/);
+    NPZResources[i]['Categories'] = NPZResources[i]['Categories'].split(/,\s*/);
   }
-  
+
   for (i=0;i<NPZResources.length;i++)
   {
     // Create the content of the popup for the marker
@@ -165,16 +167,15 @@ function createMarkers() {
       }
     }
   }
+  overlay={};
+
+  for (c in categories)
+  {
+    overlay[c]=L.layerGroup(categories[c]);
+  }
+
+  L.control.layers(null, overlay, {collapsed: false}).addTo(map);
 }
-
-overlay={};
-
-for (c in categories)
-{
-  overlay[c]=L.layerGroup(categories[c]);
-}
-
-L.control.layers(null, overlay, {collapsed: false}).addTo(map);
 
 displayedCategories=[];
 
