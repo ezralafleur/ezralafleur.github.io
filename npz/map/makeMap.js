@@ -108,20 +108,15 @@ for (i in NPZCensusTracts['features'])
 
 // Add the markers for organizations
 
-categories = {
-  "Education": [],
-  "Employment": [],
-  "Food": [],
-  "Housing": [],
-  "Legal": [],
-  "Medical": [],
-  "Transportation": []
-};
+let categories = {};
 
 function createMarkers(NPZResources) {
   for (var i in NPZResources) {
     NPZResources[i]['Coords'] = NPZResources[i]['Coords'].split(/,\s*/);
     NPZResources[i]['Categories'] = NPZResources[i]['Categories'].split(/,\s*/);
+    for (var j in NPZResources[i]['Categories']) {
+      categories[NPZResources[i]['Categories'][j]] = [];
+    }
   }
 
   for (i=0;i<NPZResources.length;i++)
